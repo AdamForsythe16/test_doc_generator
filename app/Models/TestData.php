@@ -14,7 +14,23 @@ class TestData extends Model
         return $this->belongsTo('App\Models\Test', 'test_id');
     }
 
+    public function getItems($id) {
+
+        $data = $this->whereTestId($id)->get();
+
+        return $data;
+    }
+
     public function storeTestData($request) {
+
+        $testData = self::whereTestId($request->test)->get();
+
+        foreach($testData as $data) {
+
+            $data->delete();
+        }
+
+        dd($request->tests);
 
         foreach ($request->tests as $key => $value) {
 

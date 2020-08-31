@@ -42,11 +42,12 @@ class TestsController extends Controller
         return redirect('projects/'.$project->id.'/tests/'.$id);
     }
 
-    public function show(Project $project, Test $test) {
+    public function show(Project $project, Test $test, TestData $testData) {
 
         $data = [
             'title' => 'Create test data',
             'test' => $test,
+            'test_data' => $testData->getItems($test->id),
             'method' => 'POST',
             'url' => 'projects/'.$project->id.'/tests/'.$test->id.'/store',
         ];
